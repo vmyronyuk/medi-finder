@@ -8,7 +8,9 @@ export default function LoginPage() {
 			<h1 className='text-4xl font-bold'>Вхід</h1>
 			<Input type='email' placeholder='Email' />
 			<Input type='password' placeholder='Password' />
-			<Button className='w-full'>Ввійти</Button>
+			<Button className='w-full' asChild>
+				<Link href='/onboarding/1'>Ввійти</Link>
+			</Button>
 			<Button variant='link' className='w-full p-0' asChild>
 				<Link href='/auth/register'>Ще не маєте акаунт?</Link>
 			</Button>

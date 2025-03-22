@@ -1,4 +1,4 @@
-import { Pill } from 'lucide-react'
+import { BriefcaseMedical } from 'lucide-react'
 
 export default function Logo() {
 	return (
@@ -6,7 +6,7 @@ export default function Logo() {
 			<span>
 				Medi<span className='text-transparent'>Finder</span>
 			</span>
-			<Pill className='w-7 h-7 text-green-800' />
+			<BriefcaseMedical className='w-7 h-7 mt-1 text-green-800' />
 		</h2>
 	)
 }
