@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 export default function Page5() {
 	return (
@@ -8,7 +9,9 @@ export default function Page5() {
 				Тепер ви можете почати обмінюватися ліками з іншими користувачами. Для
 				цього переходьте до розділу &apos;Мій профіль&apos;
 			</p>
-			<Button>Перейти до профілю</Button>
+			<Button asChild>
+				<Link href='/profile'>Перейти до профілю</Link>
+			</Button>
 		</div>
 	)
 }
