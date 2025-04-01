@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function MyMedicamentsPage() {
 	return (
-		<div className='container mx-auto px-5 py-3'>
+		<div className='py-3'>
 			<div className='flex items-center justify-between'>
 				<h1 className='text-2xl font-bold'>Мої медикаменти</h1>
 				<Button asChild>

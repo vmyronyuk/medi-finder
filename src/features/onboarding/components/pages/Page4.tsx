@@ -1,3 +1,5 @@
+import { Heading } from '@/components/typography/Heading'
+import { Paragraph } from '@/components/typography/Paragraph'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { useNextStep } from '../../hooks/useNextStep'
@@ -7,25 +9,31 @@ export default function Page4() {
 
 	return (
 		<div className='flex flex-col gap-3 text-center'>
-			<h1 className='text-2xl font-bold'>Ознайомтесь з правилами безпеки </h1>
-			<p className='text-gray-500'>
+			<Heading level={2}>Ознайомтесь з правилами безпеки </Heading>
+			<Paragraph className='text-gray-500'>
 				Щоб забезпечити безпечний обмін ліками, ми просимо вас ознайомитися з
 				нашими правилами.
-			</p>
+			</Paragraph>
 			<div className='flex flex-col gap-2 text-left'>
 				{rules.map(rule => (
 					<div className='flex flex-col gap-2' key={rule.title}>
-						<h3 className='text-lg font-bold'>{rule.title}</h3>
+						<Heading level={3} className='text-lg font-bold'>
+							{rule.title}
+						</Heading>
 						{rule.description && (
-							<p className='font-bold'>✅ {rule.description}</p>
+							<Paragraph className='font-bold'>✅ {rule.description}</Paragraph>
 						)}
-						<p className='font-semibold'>⛔ {rule.additional}</p>
+						<Paragraph className='font-semibold'>
+							⛔ {rule.additional}
+						</Paragraph>
 					</div>
 				))}
 			</div>
 			<div className='flex items-center gap-2 text-left'>
-				<Checkbox />
-				<p className='font-semibold'>Я ознайомився з правилами і приймаю їх</p>
+				<Checkbox className='border-primary' />
+				<Paragraph className='font-bold'>
+					Я ознайомився з правилами і приймаю їх
+				</Paragraph>
 			</div>
 			<Button onClick={nextStep}>Завершити налаштування</Button>
 		</div>

@@ -1,3 +1,4 @@
+import { Heading } from '@/components/typography/Heading'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import Link from 'next/link'
@@ -5,7 +6,7 @@ import Link from 'next/link'
 export default function RegisterPage() {
 	return (
 		<form className='w-full sm:w-1/2 flex justify-center flex-col items-center gap-5 px-10 md:px-18 lg:px-32'>
-			<h1 className='text-4xl font-bold'>Реєстрація</h1>
+			<Heading level={1}>Реєстрація</Heading>
 			<div className='flex flex-col gap-3 w-full'>
 				<Input type='email' placeholder='Електронна пошта' />
 				<Input type='password' placeholder='Пароль' />
