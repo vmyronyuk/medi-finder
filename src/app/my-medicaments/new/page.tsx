@@ -1,9 +1,16 @@
+import { CustomSelect } from '@/components/CustomSelect'
+import { DatePicker } from '@/components/DatePicker'
 import { Heading } from '@/components/typography/Heading'
 import { Paragraph } from '@/components/typography/Paragraph'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { oblastOptions } from '@/features/medicaments/business/address'
+import {
+	formOfMedicamentsOptions,
+	medicamentsOptions,
+} from '@/features/medicaments/business/medicaments'
 import { Tablets } from 'lucide-react'
 
 export default function NewMedicamentPage() {
@@ -26,16 +33,25 @@ export default function NewMedicamentPage() {
 						<Heading level={4}>Основна інформація</Heading>
 						<div className='flex flex-col gap-2'>
 							<Input placeholder='Назва препарату*' />
-							<Input placeholder='Категорія*' />
+							<div>
+								<CustomSelect
+									placeholder='Категорія*'
+									options={medicamentsOptions}
+								/>
+							</div>
 							<Input placeholder='Термін придатності*' />
-							<Input placeholder='Форма випуску' />
+							<DatePicker />
+							<CustomSelect
+								placeholder='Форма випуску'
+								options={formOfMedicamentsOptions}
+							/>
 							<Input placeholder='Кількість' />
 						</div>
 						<Heading level={4} className='mt-2'>
 							Адреса
 						</Heading>
 						<div className='flex flex-col gap-2'>
-							<Input placeholder='Область*' />
+							<CustomSelect placeholder='Область*' options={oblastOptions} />
 							<Input placeholder='Місто*' />
 							<Input placeholder='Вулиця' />
 						</div>
