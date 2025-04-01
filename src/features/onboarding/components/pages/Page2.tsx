@@ -1,3 +1,5 @@
+import { Heading } from '@/components/typography/Heading'
+import { Paragraph } from '@/components/typography/Paragraph'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useNextStep } from '@/features/onboarding/hooks/useNextStep'
@@ -5,13 +7,15 @@ export default function Page2() {
 	const { nextStep } = useNextStep(2)
 	return (
 		<div className='flex flex-col gap-3 text-center'>
-			<h1 className='text-2xl font-bold'>Заповніть ваш профіль 😊</h1>
-			<p className='text-gray-500'>
+			<Heading level={2}>Заповніть ваш профіль 😊</Heading>
+			<Paragraph className='text-gray-500'>
 				Щоб почати використовувати платформу, вам потрібно вказати кілька
 				основних даних
-			</p>
+			</Paragraph>
 			<form className='flex flex-col gap-3 px-2 py-2'>
-				<h3 className='text-md text-left font-bold'>Особисті дані</h3>
+				<Heading level={3} className='text-left'>
+					Особисті дані
+				</Heading>
 				<div className='flex gap-3'>
 					<Input type='text' placeholder="Ім'я" />
 					<Input type='text' placeholder='Прізвище' />
@@ -19,7 +23,9 @@ export default function Page2() {
 				<Input type='email' placeholder='По батькові' />
 				<Input type='text' placeholder='Номер телефону' />
 				<Input type='text' placeholder='Дата народження' />
-				<h3 className='text-md text-left font-bold'>Місце проживання</h3>
+				<Heading level={3} className='text-left'>
+					Місце проживання
+				</Heading>
 				<div className='flex flex-col gap-3'>
 					<Input type='text' placeholder='Область' />
 					<Input type='text' placeholder='Населений пункт' />

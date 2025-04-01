@@ -46,7 +46,7 @@
 
 :root {
 	--radius: 0.625rem;
-	--background: hsl(136 18% 88%);
+	--background: hsl(136 18% 86%);
 	--foreground: hsl(136 45% 16%);
 	--card: oklch(1 0 0);
 	--card-foreground: oklch(0.145 0 0);
@@ -119,5 +119,11 @@
 	}
 	body {
 		@apply bg-background text-foreground;
+	}
+}
+
+@layer components {
+	.container {
+		@apply sm:max-w-[640px] md:max-w-[768px] lg:max-w-[1024px] xl:max-w-[1280px] 2xl:max-w-[1536px];
 	}
 }

@@ -1,3 +1,5 @@
+import { Heading } from '@/components/typography/Heading'
+import { Paragraph } from '@/components/typography/Paragraph'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { useNextStep } from '../../hooks/useNextStep'
@@ -27,13 +29,11 @@ export default function Page3() {
 
 	return (
 		<div className='flex flex-col gap-3'>
-			<h1 className='text-2xl font-bold'>
-				Оберіть категорії ліків для обміну 💊
-			</h1>
-			<p className='text-gray-500'>
+			<Heading level={2}>Оберіть категорії ліків для обміну 💊</Heading>
+			<Paragraph className='text-gray-500'>
 				Виберіть категорії ліків, які ви готові обмінювати. Це дозволить
 				знаходити релевантні пропозиції для обміну.
-			</p>
+			</Paragraph>
 			<div className='flex flex-col gap-2'>
 				{categories.map(category => (
 					<div
