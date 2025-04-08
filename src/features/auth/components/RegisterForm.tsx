@@ -7,11 +7,14 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { signupAction } from '../actions'
 import { RegisterDto, RegisterDtoSchema } from '../dtos/register.dto'
 
 export function RegisterForm() {
+	const [loading, setLoading] = useState(false)
+
 	const {
 		register,
 		handleSubmit,
@@ -21,9 +24,10 @@ export function RegisterForm() {
 		resolver: zodResolver(RegisterDtoSchema),
 	})
 
-	const onSubmit = (data: RegisterDto) => {
-		console.log(data)
-		redirect('/auth/login')
+	const onSubmit = async (data: RegisterDto) => {
+		setLoading(true)
+		await signupAction(data)
+		setLoading(false)
 	}
 
 	return (
@@ -57,10 +61,10 @@ export function RegisterForm() {
 					/>
 					<Error error={errors.confirmPassword} />
 				</Field>
-				<Button className='w-full' type='submit'>
+				<Button loading={loading} className='w-full' type='submit'>
 					Зареєструватися
 				</Button>
-				<Button variant='link' className='w-full' asChild>
+				<Button variant='link' className='w-full'>
 					<Link href='/auth/login'>Вже маєте акаунт?</Link>
 				</Button>
 			</div>

@@ -8,10 +8,13 @@ import { Input } from '@/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { loginAction } from '../actions'
 import { LoginDto, LoginDtoSchema } from '../dtos/login.dto'
 
 export function LoginForm() {
+	const [loading, setLoading] = useState(false)
 	const {
 		register,
 		handleSubmit,
@@ -20,8 +23,9 @@ export function LoginForm() {
 		mode: 'onChange',
 		resolver: zodResolver(LoginDtoSchema),
 	})
-	const onSubmit = (data: LoginDto) => {
-		console.log(data)
+	const onSubmit = async (data: LoginDto) => {
+		setLoading(true)
+		await loginAction(data)
 		redirect('/onboarding/1')
 	}
 
@@ -46,7 +50,7 @@ export function LoginForm() {
 			<Button type='submit' className='w-full'>
 				Ввійти
 			</Button>
-			<Button variant='link' asChild>
+			<Button loading={loading} variant='link' asChild>
 				<Link href='/auth/register'>Ще не маєте акаунт?</Link>
 			</Button>
 		</form>
