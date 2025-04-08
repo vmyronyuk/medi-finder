@@ -11,7 +11,7 @@ export default function Page5() {
 				Тепер ви можете почати обмінюватися ліками з іншими користувачами. Для
 				цього переходьте до розділу &apos;Мій профіль&apos;
 			</Paragraph>
-			<Button asChild>
+			<Button>
 				<Link href='/profile'>Перейти до профілю</Link>
 			</Button>
 		</div>

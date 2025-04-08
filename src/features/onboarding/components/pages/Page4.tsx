@@ -1,11 +1,37 @@
+import { Error } from '@/components/form/Error'
 import { Heading } from '@/components/typography/Heading'
 import { Paragraph } from '@/components/typography/Paragraph'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { updateConfirmRulesAction } from '../../actions/page4'
+import { rules } from '../../business/rules'
+import {
+	ConfirmRulesDto,
+	ConfirmRulesDtoSchema,
+} from '../../dtos/confirm-rules.dto'
 import { useNextStep } from '../../hooks/useNextStep'
 
 export default function Page4() {
+	const [loading, setLoading] = useState(false)
 	const { nextStep } = useNextStep(4)
+
+	const {
+		control,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<ConfirmRulesDto>({
+		mode: 'onChange',
+		resolver: zodResolver(ConfirmRulesDtoSchema),
+	})
+
+	const onClick = async (data: ConfirmRulesDto) => {
+		setLoading(true)
+		await updateConfirmRulesAction(data)
+		nextStep()
+	}
 
 	return (
 		<div className='flex flex-col gap-3 text-center'>
@@ -29,56 +55,31 @@ export default function Page4() {
 					</div>
 				))}
 			</div>
-			<div className='flex items-center gap-2 text-left'>
-				<Checkbox className='border-primary' />
-				<Paragraph className='font-bold'>
-					Я ознайомився з правилами і приймаю їх
-				</Paragraph>
-			</div>
-			<Button onClick={nextStep}>Завершити налаштування</Button>
+			<form
+				className='flex flex-col gap-2 text-left'
+				onSubmit={handleSubmit(onClick)}
+			>
+				<div className='flex items-center gap-2 text-left'>
+					<Controller
+						name='confirmRules'
+						control={control}
+						render={({ field }) => (
+							<Checkbox
+								checked={field.value}
+								onCheckedChange={field.onChange}
+							/>
+						)}
+					/>
+					<Paragraph className='font-bold'>
+						Я ознайомився з правилами і приймаю їх
+					</Paragraph>
+				</div>
+				<Error error={errors.confirmRules} />
+
+				<Button loading={loading} type='submit'>
+					Завершити налаштування
+				</Button>
+			</form>
 		</div>
 	)
 }
-
-const rules = [
-	{
-		title: 'Легальність ліків',
-		description:
-			'Обмін дозволений тільки для сертифікованих лікарських засобів, офіційно зареєстрованих в Україні.',
-		additional:
-			'Заборонено передавати наркотичні, психотропні та інші препарати, що підлягають контролю державних органів.',
-	},
-	{
-		title: 'Стан та термін придатності',
-		description:
-			'Ліки повинні бути в заводському пакуванні та мати неушкоджену інструкцію (якщо вона є). Термін придатності препарату має становити щонайменше 3 місяці до закінчення.',
-		additional:
-			'Заборонено передавати прострочені, відкриті або пошкоджені препарати.',
-	},
-	{
-		title: 'Особисті дані та конфіденційність',
-		description:
-			'Всі операції обміну повинні відбуватися через платформу, без передачі особистих даних третім особам.',
-		additional:
-			'Заборонено вимагати від інших користувачів паспортні дані, адреси або інші чутливі дані.',
-	},
-	{
-		title: 'Безпека отримання ліків',
-		description:
-			'Рекомендується здійснювати обмін через поштові сервіси або особисті зустрічі у безпечних громадських місцях.',
-		additional:
-			'Заборонено вимагати оплату за передані ліки – обмін є безкоштовним.',
-	},
-	{
-		title: 'Відповідальність користувачів',
-		description:
-			'Користувач самостійно несе відповідальність за достовірність інформації про препарати, які він передає або отримує.',
-		additional:
-			'Платформа не несе відповідальності за можливі побічні ефекти або неправильне використання отриманих ліків.',
-	},
-	{
-		title: 'Порушення правил',
-		additional:
-			'За порушення будь-якого з вищевказаних правил користувач може бути заблокований без можливості відновлення акаунта.',
-	},
-]

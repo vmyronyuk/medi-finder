@@ -16,6 +16,7 @@ export const medicamentsOptions: Option[] = [
 	{ label: 'БАДи', value: 'bads' },
 	{ label: 'Антисептики', value: 'antiseptics' },
 	{ label: 'Дитячі ліки', value: 'children' },
+	{ label: 'Інші', value: 'other' },
 ]
 
 export const formOfMedicamentsValue = [

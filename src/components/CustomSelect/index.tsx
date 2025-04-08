@@ -12,12 +12,19 @@ import {
 type CustomSelectProps = {
 	placeholder: string
 	options: Option[]
+	value: string
+	onChange?: (value: string) => void
 }
 
-export function CustomSelect({ placeholder, options }: CustomSelectProps) {
+export function CustomSelect({
+	placeholder,
+	options,
+	value,
+	onChange,
+}: CustomSelectProps) {
 	return (
 		<div className='relative'>
-			<Select>
+			<Select value={value} onValueChange={onChange}>
 				<SelectTrigger>
 					<SelectValue placeholder={placeholder} />
 				</SelectTrigger>
