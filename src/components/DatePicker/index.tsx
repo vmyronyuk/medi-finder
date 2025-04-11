@@ -3,7 +3,6 @@
 import { format } from 'date-fns'
 import { uk } from 'date-fns/locale'
 import { CalendarIcon } from 'lucide-react'
-import * as React from 'react'
 
 import { Calendar } from '@/components/ui/calendar'
 import {
@@ -13,17 +12,23 @@ import {
 } from '@/components/ui/popover'
 import { Input } from '../ui/input'
 
-export function DatePicker() {
-	const [date, setDate] = React.useState<Date>()
+export type DatePickerProps = {
+	value?: Date
+	onChange?: (value: Date) => void
+}
 
+export function DatePicker({ value, onChange }: DatePickerProps) {
 	return (
 		<Popover>
 			<PopoverTrigger asChild>
 				<div className='relative'>
 					<Input
 						className='cursor-pointer'
+						readOnly
 						value={
-							date ? format(date, 'dd.MM.yyyy', { locale: uk }) : 'Оберіть дату'
+							value
+								? format(value, 'dd.MM.yyyy', { locale: uk })
+								: 'Оберіть дату'
 						}
 					></Input>
 					<CalendarIcon className='absolute right-2 top-2.5 size-5' />
@@ -33,8 +38,8 @@ export function DatePicker() {
 				<Calendar
 					locale={uk}
 					mode='single'
-					selected={date}
-					onSelect={setDate}
+					selected={value}
+					onSelect={date => date && onChange?.(date)}
 					initialFocus
 				/>
 			</PopoverContent>

@@ -26,7 +26,7 @@ export const formOfMedicamentsValue = [
 	'spray',
 	'cream',
 	'other',
-]
+] as const
 
 export const formOfMedicamentsOptions: Option[] = [
 	{ label: 'Таблетки', value: 'tablet' },
