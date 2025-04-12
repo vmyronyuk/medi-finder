@@ -16,3 +16,11 @@ export type ListingDto = {
 	street: string | null
 	communication: string | null
 }
+
+export type ListingOwnerDto = {
+	id: string
+	firstName: string
+	lastName: string
+	middleName: string
+	phoneNumber: string
+}

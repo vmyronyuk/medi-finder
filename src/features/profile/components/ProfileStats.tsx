@@ -7,22 +7,38 @@ export function ProfileStats() {
 			<StatsCard
 				title='Ти створив'
 				description='10 оголошень'
-				icon={<Megaphone className='w-8 h-8' />}
+				icon={
+					<div className='bg-muted p-2 border rounded-full'>
+						<Megaphone className='w-6 h-6 text-indigo-800' />
+					</div>
+				}
 			/>
 			<StatsCard
 				title='Ти успішно завершив'
 				description='7 обмінів'
-				icon={<HeartPulse className='w-8 h-8' />}
+				icon={
+					<div className='bg-muted p-2 border rounded-full'>
+						<HeartPulse className='w-6 h-6 text-red-600' />
+					</div>
+				}
 			/>
 			<StatsCard
 				title='Активних оголошень'
 				description='3'
-				icon={<Loader className='w-8 h-8' />}
+				icon={
+					<div className='bg-muted p-2 border rounded-full'>
+						<Loader className='w-6 h-6 text-sky-400' />
+					</div>
+				}
 			/>
 			<StatsCard
 				title='Днів на сайті'
 				description='132'
-				icon={<HandHeart className='w-8 h-8' />}
+				icon={
+					<div className='bg-muted p-2 border rounded-full'>
+						<HandHeart className='w-6 h-6 text-rose-500' />
+					</div>
+				}
 			/>
 		</div>
 	)
