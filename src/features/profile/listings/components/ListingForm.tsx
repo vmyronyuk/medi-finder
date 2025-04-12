@@ -17,11 +17,15 @@ import {
 } from '@/features/medicaments/business/medicaments'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Tablets } from 'lucide-react'
+import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import { createNewListingAction } from '../actions'
 import { communicationOptions } from '../business/communication'
 import { UserListingsDto, UserListingsDtoSchema } from '../dto'
 
 export function ListingForm() {
+	const [loading, setLoading] = useState(false)
+
 	const {
 		register,
 		control,
@@ -33,7 +37,11 @@ export function ListingForm() {
 		resolver: zodResolver(UserListingsDtoSchema),
 	})
 
-	const onSubmit = (data: UserListingsDto) => console.log(data)
+	const onSubmit = async (data: UserListingsDto) => {
+		setLoading(true)
+		await createNewListingAction(data)
+		setLoading(false)
+	}
 
 	return (
 		<form className='flex flex-col gap-3' onSubmit={handleSubmit(onSubmit)}>
@@ -41,7 +49,10 @@ export function ListingForm() {
 				<div className='w-full flex flex-col gap-2'>
 					<Heading level={4}>Основна інформація</Heading>
 					<div className='flex flex-col gap-2'>
-						<Input placeholder='Назва препарату*' {...register('name')} />
+						<Field>
+							<Input placeholder='Назва препарату*' {...register('name')} />
+							<Error error={errors.name} />
+						</Field>
 						<Field>
 							<Controller
 								name='category'
@@ -176,7 +187,7 @@ export function ListingForm() {
 				</div>
 			</div>
 
-			<Button>
+			<Button loading={loading}>
 				Додати ліки <Tablets />
 			</Button>
 		</form>

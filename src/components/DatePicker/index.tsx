@@ -28,7 +28,7 @@ export function DatePicker({ value, onChange }: DatePickerProps) {
 						value={
 							value
 								? format(value, 'dd.MM.yyyy', { locale: uk })
-								: 'Оберіть дату'
+								: 'Придатно до'
 						}
 					></Input>
 					<CalendarIcon className='absolute right-2 top-2.5 size-5' />
