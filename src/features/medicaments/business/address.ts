@@ -1,5 +1,33 @@
 import { Option } from '@/lib/types'
 
+export const oblastValue = [
+	'lviv',
+	'ivano-frankivsk',
+	'ternopil',
+	'zakarpatska',
+	'volyn',
+	'rivne',
+	'chernivtsi',
+	'khmelnytskyi',
+	'kyivska',
+	'vinnytsia',
+	'zhytomyr',
+	'poltava',
+	'cherkasy',
+	'kirovohrad',
+	'kyiv',
+	'odesa',
+	'mykolaiv',
+	'kherson',
+	'kharkiv',
+	'donetsk',
+	'luhansk',
+	'sumy',
+	'chernihiv',
+	'zaporizhzhia',
+	'dnipro',
+] as const
+
 export const oblastOptions: Option[] = [
 	{ label: 'Захід', value: 'west', isHeader: true },
 	{ label: 'Львівська', value: 'lviv' },

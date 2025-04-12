@@ -12,7 +12,7 @@ export default function Page5() {
 				цього переходьте до розділу &apos;Мій профіль&apos;
 			</Paragraph>
 			<Button>
-				<Link href='/profile'>Перейти до профілю</Link>
+				<Link href='/app/profile'>Перейти до профілю</Link>
 			</Button>
 		</div>
 	)
