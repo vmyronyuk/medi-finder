@@ -47,10 +47,10 @@ export function LoginForm() {
 				<Input type='password' placeholder='Пароль' {...register('password')} />
 				<Error error={errors.password} />
 			</Field>
-			<Button type='submit' className='w-full'>
+			<Button type='submit' className='w-full' loading={loading}>
 				Ввійти
 			</Button>
-			<Button loading={loading} variant='link' asChild>
+			<Button variant='link'>
 				<Link href='/auth/register'>Ще не маєте акаунт?</Link>
 			</Button>
 		</form>
