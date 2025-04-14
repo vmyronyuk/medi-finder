@@ -152,6 +152,7 @@ export function ListingForm() {
 								placeholder='Умови зберігання'
 								rows={2}
 								{...register('conditionOfStorage')}
+								maxLength={50}
 							/>
 							<Error error={errors.conditionOfStorage} />
 						</Field>

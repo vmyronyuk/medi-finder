@@ -1,12 +1,18 @@
 import { HandHeart, HeartPulse, Loader, Megaphone } from 'lucide-react'
+import { UserDto } from '../dal'
 import { StatsCard } from './StatsCard'
 
-export function ProfileStats() {
+type ProfileStatsProps = {
+	user: UserDto
+	listings: number
+}
+
+export function ProfileStats({ user, listings }: ProfileStatsProps) {
 	return (
 		<div className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-6 border-b-2 pb-6'>
 			<StatsCard
 				title='Ти створив'
-				description='10 оголошень'
+				description={`${user.listingsCreated} оголошень`}
 				icon={
 					<div className='bg-muted p-2 border rounded-full'>
 						<Megaphone className='w-6 h-6 text-indigo-800' />
@@ -15,7 +21,7 @@ export function ProfileStats() {
 			/>
 			<StatsCard
 				title='Ти успішно завершив'
-				description='7 обмінів'
+				description={`${String(user.confirmedListings)} обмінів`}
 				icon={
 					<div className='bg-muted p-2 border rounded-full'>
 						<HeartPulse className='w-6 h-6 text-red-600' />
@@ -24,7 +30,7 @@ export function ProfileStats() {
 			/>
 			<StatsCard
 				title='Активних оголошень'
-				description='3'
+				description={String(listings)}
 				icon={
 					<div className='bg-muted p-2 border rounded-full'>
 						<Loader className='w-6 h-6 text-sky-400' />
@@ -33,7 +39,9 @@ export function ProfileStats() {
 			/>
 			<StatsCard
 				title='Днів на сайті'
-				description='132'
+				description={String(
+					new Date().getDate() - new Date(user.created_at).getDate()
+				)}
 				icon={
 					<div className='bg-muted p-2 border rounded-full'>
 						<HandHeart className='w-6 h-6 text-rose-500' />

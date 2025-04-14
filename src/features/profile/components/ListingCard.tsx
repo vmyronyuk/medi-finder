@@ -1,3 +1,5 @@
+'use client'
+
 import { Heading } from '@/components/typography/Heading'
 import { Paragraph } from '@/components/typography/Paragraph'
 import { Badge } from '@/components/ui/badge'
@@ -11,6 +13,7 @@ import { getLabelFromValue } from '@/lib/utils/getLabel'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { ListingDto } from '../dto'
+import { deleteListingAction } from '../listings/actions'
 import { communicationOptions } from '../listings/business/communication'
 
 type ListingCardProps = {
@@ -24,6 +27,10 @@ export function ListingCard({
 	isProfile = false,
 	pageId,
 }: ListingCardProps) {
+	const deleteListingHandler = async (id: number) => {
+		await deleteListingAction(id)
+	}
+
 	return (
 		<div
 			key={listing.id}
@@ -87,7 +94,18 @@ export function ListingCard({
 
 			{isProfile && (
 				<div className='flex justify-end gap-3 pt-2 border-t'>
-					<Button variant='destructive'>Видалити</Button>
+					<Button
+						variant='destructive'
+						onClick={() => deleteListingHandler(listing.id)}
+					>
+						Видалити
+					</Button>
+					<Button
+						variant={'outline'}
+						className='bg-accent text-accent-foreground'
+					>
+						Передано
+					</Button>
 					<Link href={`/medicaments/${listing.id}`}>
 						<Button variant='default'>Переглянути</Button>
 					</Link>
