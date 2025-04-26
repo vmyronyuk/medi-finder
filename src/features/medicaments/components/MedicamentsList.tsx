@@ -54,9 +54,22 @@ function MedicamentsListComponent({ medicaments }: MedicamentsListProps) {
 		</div>
 	)
 }
+
+function MedicamentsListLoading() {
+	return (
+		<div className='h-full flex flex-col gap-3'>
+			<div className='animate-pulse'>
+				<div className='h-24 bg-gray-200 rounded mb-3'></div>
+				<div className='h-24 bg-gray-200 rounded mb-3'></div>
+				<div className='h-24 bg-gray-200 rounded'></div>
+			</div>
+		</div>
+	)
+}
+
 export function MedicamentsList({ medicaments }: MedicamentsListProps) {
 	return (
-		<Suspense fallback={<div>Loading...</div>}>
+		<Suspense fallback={<MedicamentsListLoading />}>
 			<MedicamentsListComponent medicaments={medicaments} />
 		</Suspense>
 	)
