@@ -4,12 +4,13 @@ import { ListingCard } from '@/features/profile/components/ListingCard'
 import { ListingDto } from '@/features/profile/dto'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
 
 type MedicamentsListProps = {
 	medicaments: ListingDto[]
 }
 
-export function MedicamentsList({ medicaments }: MedicamentsListProps) {
+function MedicamentsListComponent({ medicaments }: MedicamentsListProps) {
 	const searchParams = useSearchParams()
 
 	const category = searchParams.get('category')
@@ -51,5 +52,12 @@ export function MedicamentsList({ medicaments }: MedicamentsListProps) {
 				</Link>
 			))}
 		</div>
+	)
+}
+export function MedicamentsList({ medicaments }: MedicamentsListProps) {
+	return (
+		<Suspense fallback={<div>Loading...</div>}>
+			<MedicamentsListComponent medicaments={medicaments} />
+		</Suspense>
 	)
 }
