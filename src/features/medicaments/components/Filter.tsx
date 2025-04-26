@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/popover'
 import { uk } from 'date-fns/locale'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { oblastOptions } from '../business/address'
 import {
 	formOfMedicamentsOptions,
@@ -47,96 +47,98 @@ export default function ListingsFilter() {
 	}, [category, expirationDate, name, state, formOfMedicament, number])
 
 	return (
-		<div className='flex gap-3 my-3 px-4 sm:px-8 overflow-x-auto'>
-			<Popover>
-				<PopoverTrigger asChild className='w-[10rem]'>
-					<Button variant={'outline'} className='bg-accent'>
-						Назва препарату
-					</Button>
-				</PopoverTrigger>
-				<PopoverContent className='w-[16rem] p-0' align='start'>
-					<Input
-						placeholder='Назва препарату'
-						value={name}
-						onChange={e => setName(e.target.value)}
-					/>
-				</PopoverContent>
-			</Popover>
-			<Popover>
-				<PopoverTrigger asChild className='w-[10rem]'>
-					<Button variant={'outline'} className='bg-accent'>
-						Область
-					</Button>
-				</PopoverTrigger>
-				<PopoverContent className='w-[16rem] p-0' align='start'>
-					<CustomSelect
-						placeholder='Область'
-						value={state}
-						onChange={setState}
-						options={oblastOptions}
-					/>
-				</PopoverContent>
-			</Popover>
-			<Popover>
-				<PopoverTrigger asChild className='w-[10rem]'>
-					<Button variant={'outline'} className='bg-accent'>
-						Категорія
-					</Button>
-				</PopoverTrigger>
-				<PopoverContent className='w-[16rem] p-0' align='start'>
-					<CustomSelect
-						placeholder='Категорія'
-						options={medicamentsOptions}
-						value={category}
-						onChange={setCategory}
-					/>
-				</PopoverContent>
-			</Popover>
-			<Popover>
-				<PopoverTrigger asChild className='w-[10rem]'>
-					<Button variant={'outline'} className='bg-accent'>
-						Форма випуску
-					</Button>
-				</PopoverTrigger>
-				<PopoverContent className='w-[16rem] p-0' align='start'>
-					<CustomSelect
-						placeholder='Форма випуску'
-						options={formOfMedicamentsOptions}
-						value={formOfMedicament}
-						onChange={setFormOfMedicament}
-					/>
-				</PopoverContent>
-			</Popover>
-			<Popover>
-				<PopoverTrigger asChild className='w-[10rem]'>
-					<Button variant={'outline'} className='bg-accent'>
-						Придатно до
-					</Button>
-				</PopoverTrigger>
-				<PopoverContent className='w-[16rem] p-0' align='start'>
-					<Calendar
-						locale={uk}
-						mode='single'
-						selected={expirationDate ? new Date(expirationDate) : undefined}
-						onSelect={date => date && setExpirationDate(date.toISOString())}
-						initialFocus
-					/>
-				</PopoverContent>
-			</Popover>
-			<Popover>
-				<PopoverTrigger asChild className='w-[10rem]'>
-					<Button variant={'outline'} className='bg-accent'>
-						Кількість
-					</Button>
-				</PopoverTrigger>
-				<PopoverContent className='w-[16rem] p-0' align='start'>
-					<Input
-						placeholder='Кількість'
-						value={number}
-						onChange={e => setNumber(e.target.value)}
-					/>
-				</PopoverContent>
-			</Popover>
-		</div>
+		<Suspense fallback={<div>Loading filters...</div>}>
+			<div className='flex gap-3 my-3 px-4 sm:px-8 overflow-x-auto'>
+				<Popover>
+					<PopoverTrigger asChild className='w-[10rem]'>
+						<Button variant={'outline'} className='bg-accent'>
+							Назва препарату
+						</Button>
+					</PopoverTrigger>
+					<PopoverContent className='w-[16rem] p-0' align='start'>
+						<Input
+							placeholder='Назва препарату'
+							value={name}
+							onChange={e => setName(e.target.value)}
+						/>
+					</PopoverContent>
+				</Popover>
+				<Popover>
+					<PopoverTrigger asChild className='w-[10rem]'>
+						<Button variant={'outline'} className='bg-accent'>
+							Область
+						</Button>
+					</PopoverTrigger>
+					<PopoverContent className='w-[16rem] p-0' align='start'>
+						<CustomSelect
+							placeholder='Область'
+							value={state}
+							onChange={setState}
+							options={oblastOptions}
+						/>
+					</PopoverContent>
+				</Popover>
+				<Popover>
+					<PopoverTrigger asChild className='w-[10rem]'>
+						<Button variant={'outline'} className='bg-accent'>
+							Категорія
+						</Button>
+					</PopoverTrigger>
+					<PopoverContent className='w-[16rem] p-0' align='start'>
+						<CustomSelect
+							placeholder='Категорія'
+							options={medicamentsOptions}
+							value={category}
+							onChange={setCategory}
+						/>
+					</PopoverContent>
+				</Popover>
+				<Popover>
+					<PopoverTrigger asChild className='w-[10rem]'>
+						<Button variant={'outline'} className='bg-accent'>
+							Форма випуску
+						</Button>
+					</PopoverTrigger>
+					<PopoverContent className='w-[16rem] p-0' align='start'>
+						<CustomSelect
+							placeholder='Форма випуску'
+							options={formOfMedicamentsOptions}
+							value={formOfMedicament}
+							onChange={setFormOfMedicament}
+						/>
+					</PopoverContent>
+				</Popover>
+				<Popover>
+					<PopoverTrigger asChild className='w-[10rem]'>
+						<Button variant={'outline'} className='bg-accent'>
+							Придатно до
+						</Button>
+					</PopoverTrigger>
+					<PopoverContent className='w-[16rem] p-0' align='start'>
+						<Calendar
+							locale={uk}
+							mode='single'
+							selected={expirationDate ? new Date(expirationDate) : undefined}
+							onSelect={date => date && setExpirationDate(date.toISOString())}
+							initialFocus
+						/>
+					</PopoverContent>
+				</Popover>
+				<Popover>
+					<PopoverTrigger asChild className='w-[10rem]'>
+						<Button variant={'outline'} className='bg-accent'>
+							Кількість
+						</Button>
+					</PopoverTrigger>
+					<PopoverContent className='w-[16rem] p-0' align='start'>
+						<Input
+							placeholder='Кількість'
+							value={number}
+							onChange={e => setNumber(e.target.value)}
+						/>
+					</PopoverContent>
+				</Popover>
+			</div>
+		</Suspense>
 	)
 }

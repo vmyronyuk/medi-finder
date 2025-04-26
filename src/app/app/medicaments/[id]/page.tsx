@@ -24,15 +24,13 @@ import {
 } from 'lucide-react'
 import { redirect } from 'next/navigation'
 
-export default async function MedicamentPage({
-	params,
-}: {
-	params: { id: string }
-}) {
-	const { id: pageId } = await params
+type Params = Promise<{ id: string[] }>
+
+export default async function MedicamentPage({ params }: { params: Params }) {
+	const { id } = await params
 	const medicaments = await getAllMedicaments()
 	const currentMedicament = medicaments.find(
-		medicament => medicament.id === Number(pageId)
+		medicament => medicament.id === Number(id)
 	)
 
 	if (!currentMedicament) {
