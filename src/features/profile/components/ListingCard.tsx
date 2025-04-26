@@ -106,7 +106,7 @@ export function ListingCard({
 					>
 						Передано
 					</Button>
-					<Link href={`/medicaments/${listing.id}`}>
+					<Link href={`/app/medicaments/${listing.id}`}>
 						<Button variant='default'>Переглянути</Button>
 					</Link>
 				</div>
