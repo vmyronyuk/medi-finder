@@ -24,13 +24,9 @@ import {
 } from 'lucide-react'
 import { redirect } from 'next/navigation'
 
-interface MedicamentPageProps {
-	params: {
-		id: string
-	}
-}
+type Params = Promise<{ id: string[] }>
 
-export default async function MedicamentPage({ params }: MedicamentPageProps) {
+export default async function MedicamentPage({ params }: { params: Params }) {
 	const { id } = await params
 	const medicaments = await getAllMedicaments()
 	const currentMedicament = medicaments.find(
