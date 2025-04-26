@@ -12,7 +12,7 @@ export function ProfileStats({ user, listings }: ProfileStatsProps) {
 		<div className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-6 border-b-2 pb-6'>
 			<StatsCard
 				title='Ти створив'
-				description={`${user.listingsCreated} оголошень`}
+				description={`${user.listingsCreated || 0} оголошень`}
 				icon={
 					<div className='bg-muted p-2 border rounded-full'>
 						<Megaphone className='w-6 h-6 text-indigo-800' />
@@ -21,7 +21,7 @@ export function ProfileStats({ user, listings }: ProfileStatsProps) {
 			/>
 			<StatsCard
 				title='Ти успішно завершив'
-				description={`${String(user.confirmedListings)} обмінів`}
+				description={`${String(user.confirmedListings || 0)} обмінів`}
 				icon={
 					<div className='bg-muted p-2 border rounded-full'>
 						<HeartPulse className='w-6 h-6 text-red-600' />
@@ -30,7 +30,7 @@ export function ProfileStats({ user, listings }: ProfileStatsProps) {
 			/>
 			<StatsCard
 				title='Активних оголошень'
-				description={String(listings)}
+				description={String(listings || 0)}
 				icon={
 					<div className='bg-muted p-2 border rounded-full'>
 						<Loader className='w-6 h-6 text-sky-400' />
