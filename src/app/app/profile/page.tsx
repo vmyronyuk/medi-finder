@@ -6,7 +6,19 @@ import { getUserData, getUserListings } from '@/features/profile/dal'
 export default async function ProfilePage() {
 	const userListings = await getUserListings()
 	const userData = await getUserData()
-	const currentUserData = userData[0]
+
+	const currentUserData = userData[0] || {
+		firstName: '',
+		lastName: '',
+		middleName: '',
+		phoneNumber: '',
+		state: '',
+		city: '',
+		street: '',
+		created_at: new Date(),
+		listingsCreated: 0,
+		confirmedListings: 0,
+	}
 
 	return (
 		<div className='flex flex-col gap-3'>
