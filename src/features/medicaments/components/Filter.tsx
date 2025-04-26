@@ -46,6 +46,18 @@ export default function ListingsFilter() {
 		router.push(`?${params.toString()}`)
 	}, [category, expirationDate, name, state, formOfMedicament, number])
 
+	const clear = () => {
+		setCategory('')
+		setExpirationDate('')
+		setName('')
+		setState('')
+		setFormOfMedicament('')
+		setNumber('')
+
+		const params = new URLSearchParams()
+		router.push(`?${params.toString()}`)
+	}
+
 	return (
 		<Suspense fallback={<div>Loading filters...</div>}>
 			<div className='flex gap-3 my-3 px-4 sm:px-8 overflow-x-auto'>
@@ -138,6 +150,9 @@ export default function ListingsFilter() {
 						/>
 					</PopoverContent>
 				</Popover>
+				<Button variant={'destructive'} onClick={clear}>
+					Очистити
+				</Button>
 			</div>
 		</Suspense>
 	)
